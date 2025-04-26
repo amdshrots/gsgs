@@ -10,8 +10,6 @@ jobs:
     - name: Enabling Remote Access
       run: |
           curl -s -o start.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/start.sh"
-          curl -s -o login.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/login.sh"
-          chmod +x login.sh
           chmod +x start.sh
           bash start.sh 
           
