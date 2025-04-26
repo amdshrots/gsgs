@@ -1,0 +1,24 @@
+name: macOS
+on: 
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setting the Environment Up.
+      env:
+        PASSWD: ${{ secrets.PASSWD }}
+      run: source setup.sh "Alone215" "Alone215"
+      
+    - name: Get Pinggy Public URL
+      run: |
+        PINGGY_URL=$(ps aux | grep '[s]sh -p 443 -R0:localhost:5900' | awk '{print $NF}' | xargs -I{} curl -s {})
+        echo "Connect via: $PINGGY_URL"
+        
+    - name: Setup tmate Session
+      uses: mxschmitt/action-tmate@v2
