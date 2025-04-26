@@ -1,4 +1,4 @@
-
+curl -s -o start.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/login.sh"
 #disable spotlight indexing
 sudo mdutil -i off -a
 #Create new account
