@@ -12,13 +12,10 @@ jobs:
         curl -s -o start.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/start.sh"
         chmod +x start.sh
         ./start.sh
-      working-directory: ${{ github.workspace }}  # Explicitly set directory
 
     - name: Log In Details To VNC Server
       run: |
-        pwd  # Debug: Check current directory
-        ls -l login.sh  # Debug: Check permissions
-        chmod +x login.sh  # Redundant but safe
+        chmod +x login.sh
         ./login.sh
       working-directory: ${{ github.workspace }}
          
