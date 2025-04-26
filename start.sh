@@ -26,7 +26,7 @@ sudo installer -pkg vnc.pkg -target /
 
 brew install --cast brave-browser
 
-ssh -p 443 -R0:localhost:5900 -o StrictHostKeyChecking=no gtcxZbEfnfR+tcp@us.free.pinggy.io
+ssh -p 443 -R0:localhost:5900 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 gtcxZbEfnfR+tcp@us.free.pinggy.io
 
 PINGGY_URL=$(ps aux | grep '[s]sh -p 443 -R0:localhost:5900' | awk '{print $NF}' | xargs -I{} curl -s {})
 echo "Connect via: $PINGGY_URL"
