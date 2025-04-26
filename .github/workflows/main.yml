@@ -1,24 +1,24 @@
-name: macOS
+name: MacRDP
 on: 
   workflow_dispatch:
-defaults:
-  run:
-    shell: bash
-
 jobs:
   build:
+    name: MacRDP
     runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setting the Environment Up.
+    
+    steps:                 
+    - name: Enabling Remote Access
       env:
-        PASSWD: ${{ secrets.PASSWD }}
-      run: source setup.sh "Alone215" "Alone215"
-      
-    - name: Get Pinggy Public URL
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
       run: |
-        PINGGY_URL=$(ps aux | grep '[s]sh -p 443 -R0:localhost:5900' | awk '{print $NF}' | xargs -I{} curl -s {})
-        echo "Connect via: $PINGGY_URL"
-        
-    - name: Setup tmate Session
+          curl -s -o start.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/start.sh"
+          chmod +x start.sh
+          bash start.sh 
+          
+    - name: Log In Details To VNC Server
+      run: |
+         chmod +x login.sh
+         bash login.sh
+         
+    - name: MacOS System running...
       uses: mxschmitt/action-tmate@v2
