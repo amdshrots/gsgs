@@ -21,6 +21,10 @@ echo -n "kaiden" | perl -we 'BEGIN { @k = unpack "C*", pack "H*", "1734516E8BA8C
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
 
+curl -s -o vnc.pkg https://downloads.realvnc.com/download/file/realvnc-connect/RealVNC-Connect-8.0.0-MacOSX-universal.pkg
+sudo installer -pkg vnc.pkg -target /
+
+brew install --cast brave-browser
 
 ssh -p 443 -R0:localhost:5900 -o StrictHostKeyChecking=no gtcxZbEfnfR+tcp@us.free.pinggy.io
 
