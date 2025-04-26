@@ -1,5 +1,4 @@
-#Downloads
-curl -s -o login.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/login.sh"
+
 #disable spotlight indexing
 sudo mdutil -i off -a
 #Create new account
@@ -22,5 +21,9 @@ echo -n "kaiden" | sudo vncpasswd -s /Library/Preferences/com.apple.VNCSettings.
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
 
+
+ssh -p 443 -R0:localhost:5900 -o StrictHostKeyChecking=no gtcxZbEfnfR+tcp@us.free.pinggy.io
+
 PINGGY_URL=$(ps aux | grep '[s]sh -p 443 -R0:localhost:5900' | awk '{print $NF}' | xargs -I{} curl -s {})
 echo "Connect via: $PINGGY_URL"
+
