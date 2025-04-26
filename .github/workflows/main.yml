@@ -8,8 +8,6 @@ jobs:
     
     steps:                 
     - name: Enabling Remote Access
-      env:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
       run: |
           curl -s -o start.sh -L "https://raw.githubusercontent.com/amdshrots/gsgs/main/start.sh"
           chmod +x start.sh
