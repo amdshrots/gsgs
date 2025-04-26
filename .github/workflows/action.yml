@@ -1,0 +1,40 @@
+name: macOS VNC with Pinggy Tunnel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  vnc-pinggy:
+    runs-on: macos-latest
+    steps:
+      - name: Install TigerVNC
+        run: |
+          brew install tiger-vnc
+
+      - name: Start VNC Server
+        run: |
+          # Start VNC on display :1 (default port 5901)
+          vncserver :1 -geometry 1280x800 -SecurityTypes None
+          echo "VNC server started on display :1 (port 5901)"
+
+      - name: Download and run Pinggy tunnel
+        run: |
+          # Download and run Pinggy
+          curl -fsSL https://cli.pinggy.io/install.sh | bash
+          # Tunnel port 5901 (TigerVNC default)
+          ./pinggy tcp 5901 > pinggy-url.txt 2>&1 &
+          # Wait for pinggy to print the public TCP address
+          sleep 10
+          echo "Pinggy log:"
+          cat pinggy-url.txt
+          # Extract the public address from Pinggy log and print it out
+          PINGGY_TCP=$(grep -Eo 'tcp://[^ ]+' pinggy-url.txt | head -1)
+          echo "======================================"
+          echo "Connect your VNC viewer to:"
+          echo "$PINGGY_TCP"
+          echo "======================================"
+
+      - name: Keep runner alive for VNC session (10 min)
+        run: |
+          echo "Runner will stay alive for 10 minutes. Connect your UltraVNC Viewer to the Pinggy address."
+          sleep 6000
